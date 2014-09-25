@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>SkullSpace :: Game AI Hackathon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <link rel="shortcut icon" type="image/x-icon" href="/img/logo.png" />
+    <link rel="icon" type="image/x-icon" href="/img/logo.png" />
+
+    <!-- Le styles -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <style type="text/css">
+      body {
+        padding-top: 20px;
+        padding-bottom: 40px;
+      }
+
+      /* Custom container */
+      .container-narrow {
+        margin: 0 auto;
+        max-width: 700px;
+      }
+      .container-narrow > hr {
+        margin: 30px 0;
+      }
+
+      /* Main marketing message and sign up button */
+      .jumbotron {
+        margin: 60px 0;
+        text-align: center;
+      }
+      .jumbotron h1 {
+        font-size: 72px;
+        line-height: 1;
+      }
+      .jumbotron .btn {
+        font-size: 21px;
+        padding: 14px 24px;
+      }
+
+      /* Supporting marketing content */
+      .marketing {
+        margin: 60px 0;
+      }
+      .marketing p + h4 {
+        margin-top: 28px;
+      }
+    </style>
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="/js/html5shiv.js"></script>
+    <![endif]-->
+
+    <!-- fork me on github stuff, from http://codepo8.github.com/css-fork-on-github-ribbon/ -->
+    <style>
+      #forkongithub a {
+        background:#a00;
+        color:#fff;
+        text-decoration:none;
+        font-family:arial, sans-serif;
+        text-align:center;
+        font-weight:bold;
+        padding:5px 40px;
+        font-size:1rem;
+        line-height:2rem;
+        position:relative;
+        transition:0.5s;
+      }
+      #forkongithub a:hover {
+        background:#060;
+        color:#fff;
+      }
+      #forkongithub a::before, #forkongithub a::after {
+        content:"";
+        width:100%;
+        display:block;
+        position:absolute;
+        top:1px;
+        left:0;
+        height:1px;
+        background:#fff;
+      }
+      #forkongithub a::after {
+        bottom:1px;
+        top:auto;
+      }
+      @media screen and (min-width:1000px) {
+        #forkongithub {
+          position:absolute;
+          display:block;
+          top:0;
+          left:0;
+          width:200px;
+          overflow:hidden;
+          height:200px;
+        }
+        #forkongithub a {
+          width:200px;
+          position:absolute;
+          top:60px;
+          left:-60px;
+          transform:rotate(-45deg);
+          -webkit-transform:rotate(-45deg);
+          box-shadow:4px 4px 10px rgba(0,0,0,0.8);
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+
+      <div class="masthead">
+        <ul class="nav nav-pills pull-right">
+          <li><a href="/">Home</a></li>
+          <li><a href="/about/">About</a></li>
+          <li><a href="/contact/">Contact</a></li>
+          <li><a href="/rules/">Rules</a></li>
+          <li><a href="/stats/">Stats</a></li>
+          <li class="active"><a href="/api/">API</a></li>
+        </ul>
+        <h3><a class="muted" href="http://skullspace.ca/">SkullSpace</a></h3>
+      </div>
+
+      <hr>
+
+      <div class="jumbotron">
+        <h1>Game AI Hackathon</h1>
+        <p class="lead">September 19th &ndash; 21st, 2014</p>
+        <a class="btn btn-large btn-success" href="/gameai-sdk-v3.zip">Download SDK v3</a>
+      </div>
+
+      <hr>
+
+      <div class="row-fluid marketing">
+        <div class="span12">
+          <img src="/img/api-status.png" usemap="#api-map"/>
+	  <map name="api-map">
+	    <area shape="circle" coords="41,121,40"  href="/api/register/" alt="register">
+	    <area shape="circle" coords="141,121,40" href="/api/login/"    alt="login">
+	    <area shape="circle" coords="241,121,40" href="/api/new-game/" alt="new-game">
+	    <area shape="circle" coords="341,121,40" href="/api/bid/"      alt="bid">
+	    <area shape="circle" coords="431,41,40"  href="/api/status/"   alt="status">
+	    <area shape="circle" coords="431,201,40" href="/api/play/"     alt="play">
+	  </map>
+        </div>
+
+        <div class="span12">
+          <p class="lead">API Method :: STATUS</p>
+
+          <p class="alert alert-danger">You have requested this page using
+          the <tt>GET</tt> HTTP request method, to actually invoke this API
+          endpoint you are required to use
+          <tt>POST</tt>.</p>
+
+          <p class="alert alert-info">All JSON in this page has been formatted
+          with <a href="http://jsonlint.com/">JSONLint</a>, whitespace is not
+          significant to the server. The order of keys in JSON object doesn't
+          matter.</p>
+
+          <p class="alert alert-warning">This method does not update your
+          game-specific timeout value. This behaviour exists to prevent abuse,
+          specifically a bot that permanently hold another bot hostage in an
+          endless game, never playing a card but never timing out.</p>
+
+          <p>This method informs you of the status of the current game you are
+          playing. This method accepts JSON in the body of the HTTP request, as
+          follows:</p>
+
+<pre>{
+    "session": "A hex string will appear here."
+}</pre><p></p>
+
+	  <p class="lead">Possible responses:</p>
+	  <ol>
+	<li>
+          <p>The server will respond with the following if it is the first round
+          and you have the first turn, and you have not yet played a card:</p>
+
+<pre>{
+    "result": "success"
+    "game": 3,
+    "round": 1,
+    "your-turn": true,
+    "opponent": 5,
+    "opponent-bid": 8,
+    "opponent-previous-card": null,
+    "opponent-current-card": null,
+    "you-won-previous-round": null
+}</pre></li>
+
+          <li><p>The server will respond with the following if it is the first round
+          and you had the first turn, and you have played a card, but your
+          opponent has not:</p>
+
+<pre>{
+    "result": "success"
+    "game": 3,
+    "round": 1,
+    "your-turn": false,
+    "opponent": 5,
+    "opponent-bid": 8,
+    "opponent-previous-card": null,
+    "opponent-current-card": null,
+    "you-won-previous-round": null
+}</pre></li>
+
+          <li><p>The server will respond with the following if it is the first round
+          and you have the second turn, and neither player has played a
+          card:</p>
+
+<pre>{
+    "result": "success"
+    "game": 3,
+    "round": 1,
+    "your-turn": false,
+    "opponent": 5,
+    "opponent-bid": 8,
+    "opponent-previous-card": null,
+    "opponent-current-card": null,
+    "you-won-previous-round": null
+}</pre></li>
+
+          <li><p>The server will respond with the following if it is the first round
+          and you have the second turn, and your opponent has played a card:</p>
+
+<pre>{
+    "result": "success"
+    "game": 3,
+    "round": 1,
+    "your-turn": true,
+    "opponent": 5,
+    "opponent-bid": 8,
+    "opponent-previous-card": null,
+    "opponent-current-card": "H03",
+    "you-won-previous-round": null
+}</pre></li>
+
+          <li><p>The server will respond with the following if it is the second
+          round and you won the first round, and you have not yet played a card
+          for this round:</p>
+
+<pre>{
+    "result": "success"
+    "game": 3,
+    "round": 2,
+    "your-turn": true,
+    "opponent": 5,
+    "opponent-bid": 8,
+    "opponent-previous-card": "H03",
+    "opponent-current-card": null,
+    "you-won-previous-round": true
+}</pre></li>
+
+          <li><p>The server will respond with the following if it is the second
+          round and you lost the first round, and your opponent has not yet
+          played a card for this round:</p>
+
+<pre>{
+    "result": "success"
+    "game": 3,
+    "round": 2,
+    "your-turn": false,
+    "opponent": 5,
+    "opponent-bid": 8,
+    "opponent-previous-card": "H03",
+    "opponent-current-card": null,
+    "you-won-previous-round": false
+}</pre></li>
+
+          <li><p>The server will respond with the following if there is a problem
+          with your session:</p>
+
+<pre>{
+    "result": "failure",
+    "reason": "An explanation of the failure will appear here."
+}</pre></li>
+	</ol>
+        </div>
+    </div> <!-- /container -->
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+  </body>
+</html>

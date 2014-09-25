@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>SkullSpace :: Game AI Hackathon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <link rel="shortcut icon" type="image/x-icon" href="/img/logo.png" />
+    <link rel="icon" type="image/x-icon" href="/img/logo.png" />
+
+    <!-- Le styles -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <style type="text/css">
+      body {
+        padding-top: 20px;
+        padding-bottom: 40px;
+      }
+
+      /* Custom container */
+      .container-narrow {
+        margin: 0 auto;
+        max-width: 700px;
+      }
+      .container-narrow > hr {
+        margin: 30px 0;
+      }
+
+      /* Main marketing message and sign up button */
+      .jumbotron {
+        margin: 60px 0;
+        text-align: center;
+      }
+      .jumbotron h1 {
+        font-size: 72px;
+        line-height: 1;
+      }
+      .jumbotron .btn {
+        font-size: 21px;
+        padding: 14px 24px;
+      }
+
+      /* Supporting marketing content */
+      .marketing {
+        margin: 60px 0;
+      }
+      .marketing p + h4 {
+        margin-top: 28px;
+      }
+    </style>
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="/js/html5shiv.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+    <div class="container">
+
+      <div class="masthead">
+        <ul class="nav nav-pills pull-right">
+          <li><a href="/">Home</a></li>
+          <li><a href="/about/">About</a></li>
+          <li><a href="/contact/">Contact</a></li>
+          <li><a href="/rules/">Rules</a></li>
+          <li class="active"><a href="/stats/">Stats</a></li>
+          <li><a href="/api/">API</a></li>
+        </ul>
+        <h3><a class="muted" href="http://skullspace.ca/">SkullSpace</a></h3>
+      </div>
+
+      <hr>
+
+      <div class="jumbotron">
+        <h1>Game AI Hackathon</h1>
+        <p class="lead">September 19th &ndash; 21st, 2014</p>
+      </div>
+
+      <hr>
+
+      <div class="row-fluid marketing">
+        <div class="span12">
+          <h1>Bots</h1>
+
+	  <p>This is a list of all registered bots, sorted by most
+	  recently active and indicating whether the bot is currently
+	  online.</p>
+
+	  <table class="table table-condensed table-hover">
+	    <thead>
+	      <tr>
+		<td>Name</td>
+		<td>ID</td>
+		<td>Game</td>
+	      </tr>
+	    </thead>
+	    <tbody>
+              {{bots}}
+	    </tbody>
+	  </table>
+
+        </div>
+    </div> <!-- /container -->
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+  </body>
+</html>

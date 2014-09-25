@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>SkullSpace :: Game AI Hackathon</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/img/logo.png" />
+    <link rel="icon" type="image/x-icon" href="/img/logo.png" />
+
+    <link href="/css/c3.css" rel="stylesheet">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/d3.v3.min.js"></script>
+    <script src="/js/c3.min.js"></script>
+
+		<div id="chart"></div>
+
+    <script>
+			// This endpoint serves up a simple array of integers.
+      var url = '/stats/bots.json';
+			var xaxis_label = "Rounds played per minute (past hour shown)";
+
+      chart = c3.generate({
+        data: {
+          columns: [
+            ['Loading...']
+          ]
+        },
+				tooltip: {
+					show: false
+				}
+      });
+
+      function loadNewData() {
+        var req = new XMLHttpRequest();
+
+        // Synchronously fetch the JSON from the URL
+        req.open("GET", url, false);
+        req.send();
+
+        var datapoints = JSON.parse(req.responseText);
+        if (datapoints == null)
+          return;
+
+        chart.load({
+          columns: [
+            [xaxis_label].concat(datapoints)
+          ],
+					type: 'area'
+        });
+      }
+
+      loadNewData();
+      setInterval(function() {
+        loadNewData();
+      }, 30000);
+    </script>
+  </body>
+</html>

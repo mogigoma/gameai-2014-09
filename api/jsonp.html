@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>SkullSpace :: Game AI Hackathon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <link rel="shortcut icon" type="image/x-icon" href="/img/logo.png" />
+    <link rel="icon" type="image/x-icon" href="/img/logo.png" />
+
+    <!-- Le styles -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <style type="text/css">
+      body {
+        padding-top: 20px;
+        padding-bottom: 40px;
+      }
+
+      /* Custom container */
+      .container-narrow {
+        margin: 0 auto;
+        max-width: 700px;
+      }
+      .container-narrow > hr {
+        margin: 30px 0;
+      }
+
+      /* Main marketing message and sign up button */
+      .jumbotron {
+        margin: 60px 0;
+        text-align: center;
+      }
+      .jumbotron h1 {
+        font-size: 72px;
+        line-height: 1;
+      }
+      .jumbotron .btn {
+        font-size: 21px;
+        padding: 14px 24px;
+      }
+
+      /* Supporting marketing content */
+      .marketing {
+        margin: 60px 0;
+      }
+      .marketing p + h4 {
+        margin-top: 28px;
+      }
+    </style>
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="/js/html5shiv.js"></script>
+    <![endif]-->
+
+    <!-- fork me on github stuff, from http://codepo8.github.com/css-fork-on-github-ribbon/ -->
+    <style>
+      #forkongithub a {
+        background:#a00;
+        color:#fff;
+        text-decoration:none;
+        font-family:arial, sans-serif;
+        text-align:center;
+        font-weight:bold;
+        padding:5px 40px;
+        font-size:1rem;
+        line-height:2rem;
+        position:relative;
+        transition:0.5s;
+      }
+      #forkongithub a:hover {
+        background:#060;
+        color:#fff;
+      }
+      #forkongithub a::before, #forkongithub a::after {
+        content:"";
+        width:100%;
+        display:block;
+        position:absolute;
+        top:1px;
+        left:0;
+        height:1px;
+        background:#fff;
+      }
+      #forkongithub a::after {
+        bottom:1px;
+        top:auto;
+      }
+      @media screen and (min-width:1000px) {
+        #forkongithub {
+          position:absolute;
+          display:block;
+          top:0;
+          left:0;
+          width:200px;
+          overflow:hidden;
+          height:200px;
+        }
+        #forkongithub a {
+          width:200px;
+          position:absolute;
+          top:60px;
+          left:-60px;
+          transform:rotate(-45deg);
+          -webkit-transform:rotate(-45deg);
+          box-shadow:4px 4px 10px rgba(0,0,0,0.8);
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+
+      <div class="masthead">
+        <ul class="nav nav-pills pull-right">
+          <li><a href="/">Home</a></li>
+          <li><a href="/about/">About</a></li>
+          <li><a href="/contact/">Contact</a></li>
+          <li><a href="/rules/">Rules</a></li>
+          <li><a href="/stats/">Stats</a></li>
+          <li class="active"><a href="/api/">API</a></li>
+        </ul>
+        <h3><a class="muted" href="http://skullspace.ca/">SkullSpace</a></h3>
+      </div>
+
+      <hr>
+
+      <div class="jumbotron">
+        <h1>Game AI Hackathon</h1>
+        <p class="lead">September 19th &ndash; 21st, 2014</p>
+        <a class="btn btn-large btn-success" href="/gameai-sdk-v3.zip">Download SDK v3</a>
+      </div>
+
+      <hr>
+
+      <div class="row-fluid marketing">
+        <div class="span12">
+          <img src="/img/api.png" usemap="#api-map"/>
+	  <map name="api-map">
+	    <area shape="circle" coords="41,121,40"  href="/api/register/" alt="register">
+	    <area shape="circle" coords="141,121,40" href="/api/login/"    alt="login">
+	    <area shape="circle" coords="241,121,40" href="/api/new-game/" alt="new-game">
+	    <area shape="circle" coords="341,121,40" href="/api/bid/"      alt="bid">
+	    <area shape="circle" coords="431,41,40"  href="/api/status/"   alt="status">
+	    <area shape="circle" coords="431,201,40" href="/api/play/"     alt="play">
+	  </map>
+        </div>
+
+        <div class="span12">
+          <p class="lead">API Method Proxy :: JSONP</p>
+
+          <p class="alert alert-danger">You have either requested this page
+          without using the <tt>GET</tt> HTTP request method, or you have
+          invoked this method without any <tt>GET</tt> parameters.</p>
+
+          <p>This method permits you to interact with the other API methods
+          over <tt>GET</tt> using
+          <a href="https://en.wikipedia.org/wiki/JSONP">JSONP</a>. This
+          interaction method has been provided to allow participants to program
+          bots in JavaScript without having to workaround the
+          browser's <a href="https://en.wikipedia.org/wiki/Same-origin_policy">Same-Origin
+          Policy</a> themselves.</p>
+
+          <p>To invoke an API method, instead of passing a JSON object via an
+          HTTP POST request to the API endpoint, send an HTTP GET request to
+          this API endpoint but with each key that you'd normally put in the
+          JSON as a <code>key=value</code> pair in the URL. Additionally, you
+          will need to provide both a <code>callback</code> and a
+          <code>method</code> parameter to link the JSONP response back to your
+          bot's code and indicate which API method you'd like to call. For
+          example, to login with your bot using this API proxy, you can send the
+          following request:</p>
+
+<pre>$.getJSON(
+    "http://gameai.skullspace.ca/not-the-api/jsonp/?callback=?",
+    {
+        "method": "login",
+        "name": "mak",
+        "password": "monkeys"
+    },
+    function (json) {
+        alert(json.result);
+    }
+);</pre>
+
+<br>
+<p class="lead">Response:</p>
+<ol>
+    <li>
+          <p>The server will respond with the following if the login
+          succeeded:</p>
+
+<pre>jQuery21106260520856404164_141044669015({"result":"success"});</pre>
+
+          <p><a href="http://jquery.com/">jQuery</a> will fill in the value of
+          the <code>callback=?</code> parameter with an automatically-generated
+          function name, and it will also add a <code>_=timestamp</code>
+          parameter to prevent any caching.</p>
+	</li>
+    </ol>
+        </div>
+    </div> <!-- /container -->
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+  </body>
+</html>

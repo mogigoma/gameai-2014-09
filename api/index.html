@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>SkullSpace :: Game AI Hackathon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <link rel="shortcut icon" type="image/x-icon" href="/img/logo.png" />
+    <link rel="icon" type="image/x-icon" href="/img/logo.png" />
+
+    <!-- Le styles -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <style type="text/css">
+      body {
+        padding-top: 20px;
+        padding-bottom: 40px;
+      }
+
+      /* Custom container */
+      .container-narrow {
+        margin: 0 auto;
+        max-width: 700px;
+      }
+      .container-narrow > hr {
+        margin: 30px 0;
+      }
+
+      /* Main marketing message and sign up button */
+      .jumbotron {
+        margin: 60px 0;
+        text-align: center;
+      }
+      .jumbotron h1 {
+        font-size: 72px;
+        line-height: 1;
+      }
+      .jumbotron .btn {
+        font-size: 21px;
+        padding: 14px 24px;
+      }
+
+      /* Supporting marketing content */
+      .marketing {
+        margin: 60px 0;
+      }
+      .marketing p + h4 {
+        margin-top: 28px;
+      }
+    </style>
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="/js/html5shiv.js"></script>
+    <![endif]-->
+
+    <!-- fork me on github stuff, from http://codepo8.github.com/css-fork-on-github-ribbon/ -->
+    <style>
+      #forkongithub a {
+        background:#a00;
+        color:#fff;
+        text-decoration:none;
+        font-family:arial, sans-serif;
+        text-align:center;
+        font-weight:bold;
+        padding:5px 40px;
+        font-size:1rem;
+        line-height:2rem;
+        position:relative;
+        transition:0.5s;
+      }
+      #forkongithub a:hover {
+        background:#060;
+        color:#fff;
+      }
+      #forkongithub a::before, #forkongithub a::after {
+        content:"";
+        width:100%;
+        display:block;
+        position:absolute;
+        top:1px;
+        left:0;
+        height:1px;
+        background:#fff;
+      }
+      #forkongithub a::after {
+        bottom:1px;
+        top:auto;
+      }
+      @media screen and (min-width:1000px) {
+        #forkongithub {
+          position:absolute;
+          display:block;
+          top:0;
+          left:0;
+          width:200px;
+          overflow:hidden;
+          height:200px;
+        }
+        #forkongithub a {
+          width:200px;
+          position:absolute;
+          top:60px;
+          left:-60px;
+          transform:rotate(-45deg);
+          -webkit-transform:rotate(-45deg);
+          box-shadow:4px 4px 10px rgba(0,0,0,0.8);
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+
+      <div class="masthead">
+        <ul class="nav nav-pills pull-right">
+          <li><a href="/">Home</a></li>
+          <li><a href="/about/">About</a></li>
+          <li><a href="/contact/">Contact</a></li>
+          <li><a href="/rules/">Rules</a></li>
+          <li><a href="/stats/">Stats</a></li>
+          <li class="active"><a href="/api/">API</a></li>
+        </ul>
+        <h3 class="muted"><a href="http://skullspace.ca/">SkullSpace</a></h3>
+      </div>
+
+      <hr>
+
+      <div class="jumbotron">
+        <h1>Game AI Hackathon</h1>
+        <p class="lead">September 19th &ndash; 21st, 2014</p>
+        <a class="btn btn-large btn-success" href="/gameai-sdk-v3.zip">Download SDK v3</a>
+      </div>
+
+      <hr>
+
+      <div class="row-fluid marketing">
+        <div class="span12">
+          <img src="/img/api.png" usemap="#api-map"/>
+	  <map name="api-map">
+	    <area shape="circle" coords="41,121,40"  href="register/" alt="register">
+	    <area shape="circle" coords="141,121,40" href="login/"    alt="login">
+	    <area shape="circle" coords="241,121,40" href="new-game/" alt="new-game">
+	    <area shape="circle" coords="341,121,40" href="bid/"      alt="bid">
+	    <area shape="circle" coords="431,41,40"  href="status/"   alt="status">
+	    <area shape="circle" coords="431,201,40" href="play/"     alt="play">
+	  </map>
+        </div>
+
+        <div class="span12">
+          <p class="lead">API :: Overview</p>
+
+          <p class="alert alert-danger">The API is up and running, but
+          the matchmaking daemon is offline. The means that games
+          cannot be created. Games start at 6pm, when the matchmaking
+          daemon is booted.</p>
+
+          <p>The API for this game has been designed to be as simple
+	  as possible. The primary control flow of a simple bot should
+	  be composed of the following endpoints:</p>
+
+          <ul>
+            <li><a href="bid/">bid</a></li>
+            <li><a href="login/">login</a></li>
+            <li><a href="new-game/">new-game</a></li>
+            <li><a href="play/">play</a></li>
+            <li><a href="register/">register</a></li>
+            <li><a href="status/">status</a></li>
+          </ul>
+
+	  <p>Two supplementary endpoints exist for special-purpose
+	  use:</p>
+
+          <ul>
+            <li><a href="jsonp/">jsonp</a></li>
+            <li><a href="old-game/">old-game</a></li>
+          </ul>
+
+          <p>Each endpoint accepts two HTTP request methods: POST and
+          GET. If you click on any of the endpoint links above, your
+          web browser will perform an HTTP GET request, which the
+          endpoint interprets as a request for documentation. Follow
+          the instructions provided by the endpoint in its
+          documentation, and perform an HTTP POST request with your
+          bot to interact with trigger the endpoint's
+          functionality.<p>
+
+          <p>The first special-purpose
+          endpoint, <a href="jsonp/">jsonp</a>, exists to permit
+          JavaScript bots to call API methods via HTTP GET
+          requests. This is necessary due to a security scheme built
+          into all modern web browsers, which JavaScript is subject
+          to.</p>
+
+          <p>For examples of how to use the API, please see the
+          example bots in the SDK. Each bot implements the most basic
+          algorithm possible that will play the game. To be
+          specific, <b>if you run any bot in the SDK right now it will
+          actually play the game, live, on the server</b>.</p>
+        </div>
+    </div> <!-- /container -->
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+
+  </body>
+</html>

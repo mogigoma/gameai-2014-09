@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>SkullSpace :: Game AI Hackathon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <link rel="shortcut icon" type="image/x-icon" href="/img/logo.png" />
+    <link rel="icon" type="image/x-icon" href="/img/logo.png" />
+
+    <!-- Le styles -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <style type="text/css">
+      body {
+        padding-top: 20px;
+        padding-bottom: 40px;
+      }
+
+      /* Custom container */
+      .container-narrow {
+        margin: 0 auto;
+        max-width: 700px;
+      }
+      .container-narrow > hr {
+        margin: 30px 0;
+      }
+
+      /* Main marketing message and sign up button */
+      .jumbotron {
+        margin: 60px 0;
+        text-align: center;
+      }
+      .jumbotron h1 {
+        font-size: 72px;
+        line-height: 1;
+      }
+      .jumbotron .btn {
+        font-size: 21px;
+        padding: 14px 24px;
+      }
+
+      /* Supporting marketing content */
+      .marketing {
+        margin: 60px 0;
+      }
+      .marketing p + h4 {
+        margin-top: 28px;
+      }
+    </style>
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="/js/html5shiv.js"></script>
+    <![endif]-->
+
+    <!-- fork me on github stuff, from http://codepo8.github.com/css-fork-on-github-ribbon/ -->
+    <style>
+      #outer {
+        background-color:#FFFFFF;
+        border-radius: 5px;
+        color: #FFFFFF;
+      }
+
+      #div1, #div2, #div3, #div4 {
+        width: 25;
+        height: 150px;
+        box-sizing: border-box;
+        float: left;
+        color: #FFFFFF;
+      }
+
+      #div1 .arc {
+        stroke-weight: 0.1;
+        fill: #00DD00;
+      }
+
+      #div2 .arc {
+        stroke-weight: 0.1;
+        fill: #B94A48;
+      }
+
+      #div3 .arc {
+        stroke-weight: 0.1;
+        fill: #99EDFF;
+      }
+
+      #div4 .arc {
+        stroke-weight: 0.1;
+        fill: #f0a417;
+      }
+
+        .selectedRadial {
+            border-radius: 3px;
+            background: #f4f4f4;
+            color: #000;
+            box-shadow: 0 1px 5px rgba(0,0,0,0.4);
+            -moz-box-shadow: 0 1px 5px rgba(0,0,0,0.4);
+            border: 1px solid rgba(200,200,200,0.85);
+        }
+
+      .radial {
+        border-radius: 3px;
+        background: #FFFFFF;
+        color: #FFFFFF;
+      }
+
+
+.background {
+    fill: #FFFFFF;
+    fill-opacity: 0.01;
+}
+
+.component {
+    fill: #e1e1e1;
+}
+
+.component .label {
+    font-family: Myriad, "Helvetic Neue", Helvetica, Arial;
+    text-anchor: middle;
+    fill: #000000;
+}
+
+.arc {
+    stroke-weight:0.1;
+    fill: #4e8fff;
+}
+
+.label {
+    font-family:  Myriad, "Helvetic Neue", Helvetica, Arial;
+    text-anchor: middle;
+}
+
+.radial-svg {
+    display: block;
+    margin: 0 auto;
+}
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+
+      <div class="masthead">
+        <ul class="nav nav-pills pull-right">
+          <li><a href="/">Home</a></li>
+          <li><a href="/about/">About</a></li>
+          <li><a href="/contact/">Contact</a></li>
+          <li><a href="/rules/">Rules</a></li>
+          <li class="active"><a href="/stats/">Stats</a></li>
+          <li><a href="/api/">API</a></li>
+        </ul>
+        <h3><a class="muted" href="http://skullspace.ca/">SkullSpace</a></h3>
+      </div>
+
+      <hr>
+
+      <div class="jumbotron">
+        <h1>Game AI Hackathon</h1>
+        <p class="lead">September 19th &ndash; 21st, 2014</p>
+        <!-- <a class="btn btn-large btn-success" href="http://tinyurl.com/game-ai-sdk">Download SDK v3</a> -->
+      </div>
+
+      <hr>
+
+      <div class="row-fluid marketing">
+        <div class="span12">
+	  {{status1}}
+	  {{status2}}
+          <h1>Rivals :: <a href="/stats/bot/by-name/{{name1}}/">{{name1}}</a> (<a href="/stats/bot/by-id/{{id1}}/">{{id1}}</a>) vs <a href="/stats/bot/by-name/{{name2}}/">{{name2}}</a> (<a href="/stats/bot/by-id/{{id2}}/">{{id2}}</a>)</h1>
+        </div>
+
+        <div class="span12">
+	  <div id="div1" class="span3"></div>
+	  <div id="div2" class="span3"></div>
+	  <div id="div3" class="span3"></div>
+	  <div id="div4" class="span3"></div>
+	</div>
+
+        <div class="span12">
+	  <h3>Records of {{name1}} against {{name2}}</h3>
+
+	  <dl class="dl-horizontal">
+	    <dt>Wins</dt>
+	    <dd>{{wins-pct}}% ({{wins}})</dd>
+	    <dt>Losses</dt>
+	    <dd>{{losses-pct}}% ({{losses}})</dd>
+	    <dt>Ties</dt>
+	    <dd>{{ties-pct}}% ({{ties}})</dd>
+	    <dt>Forfeits</dt>
+	    <dd>{{forfeits-pct}}% ({{forfeits}})</dd>
+	    <dt>Total</dt>
+	    <dd>{{total}}</dd>
+	  </dl>
+	</div>
+
+        <div class="span12">
+	  <h3>Recent Game Records</h3>
+	  <table class="table table-condensed table-hover">
+	    <thead>
+	      <tr>
+		<th>Game</th>
+		<th>Result</th>
+		<th>Bot1</th>
+		<th>Bot2</th>
+		<th>Start Time</th>
+		<th>End Time</th>
+	      </tr>
+	    </thead>
+	    <tbody>
+              {{games}}
+	    </tbody>
+	  </table>
+
+	  <p>This view only shows the most recent fifty games that these two bots have played against one another.</p>
+        </div>
+    </div> <!-- /container -->
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/d3.min.js"></script>
+    <script src="/js/radialProgress.js"></script>
+
+    <script language="JavaScript">
+    var div1=d3.select(document.getElementById('div1'));
+    var div2=d3.select(document.getElementById('div2'));
+    var div3=d3.select(document.getElementById('div3'));
+    var div4=d3.select(document.getElementById('div4'));
+
+    function start() {
+        var rp1 = radialProgress(document.getElementById('div1'))
+                .label("Wins")
+                .diameter(150)
+                .value({{wins-pct}})
+                .render();
+
+        var rp2 = radialProgress(document.getElementById('div2'))
+                .label("Losses")
+                .diameter(150)
+                .value({{losses-pct}})
+                .render();
+
+        var rp3 = radialProgress(document.getElementById('div3'))
+                .label("Ties")
+                .diameter(150)
+                .value({{ties-pct}})
+                .render();
+
+        var rp4 = radialProgress(document.getElementById('div4'))
+                .label("Forfeits")
+                .diameter(150)
+                .value({{forfeits-pct}})
+                .render();
+    }
+
+    start();
+    </script>
+  </body>
+</html>

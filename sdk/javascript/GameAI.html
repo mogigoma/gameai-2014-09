@@ -1,0 +1,45 @@
+<html>
+  <head>
+    <title>GameAI</title>
+
+    <script type="text/javascript" src="jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="async.js"></script>
+    <script type="text/javascript" src="GameAI.js"></script>
+
+    <style type="text/css">
+      p.fail {
+        color: #ff0000;
+      }
+      p.warn {
+        color: #ff00ff;
+      }
+      p.info {
+      }
+    </style>
+  </head>
+
+  <body>
+    <p>Press the <tt>Start</tt> button to login with your bot and
+    begin playing against other bots. Press the <tt>Pause</tt> button
+    to pause the bot. Closing or reloading this page will stop the
+    bot.</p>
+
+    <p>Put your bot's name and password in the boxes below.</p>
+    <table>
+      <tr>
+        <td align="right"><label for="name">Name:</label></td>
+        <td><input type="text" id="name"/></td>
+      </tr>
+      <tr>
+        <td align="right"><label for="password">Password:</label></td>
+        <td><input type="password" id="password"/></td>
+      </tr>
+      <tr>
+        <td><input type="submit" id="go" value="Go"/></td>
+        <td><input type="submit" id="pause" value="Pause"/></td>
+      </tr>
+    </table>
+
+    <div id="log"></div>
+  </body>
+</html>
